@@ -1,5 +1,9 @@
 import { Card, CardImg, CardText, CardBody, Col } from 'reactstrap';
 
+
+
+
+
 const CampsiteDetail = ( {campsite} ) => {
     const { image, name, description } = campsite;
 

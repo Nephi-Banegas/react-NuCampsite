@@ -91,7 +91,7 @@ const ContactForm = () => {
 
         <FormGroup row>
           <Label check md={{ size: 4, offset: 2 }}>
-            <Field name="agree" type="checkbox" className="form-chec-input" />{" "}
+            <Field name="agree" type="checkbox" className="form-check-input" />{" "}
             May we contact you?
           </Label>
           <Col md="4">

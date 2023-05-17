@@ -1,27 +1,42 @@
-
 import CampsiteCard from "./CampsiteCard";
-import {Col, Row} from 'reactstrap';
+import { Col, Row } from "reactstrap";
 import { selectAllCampsites } from "./campsitesSlice";
 import { useSelector } from "react-redux";
+import Error from "../../components/Error";
+import Loading from "../../components/Loading";
 
 const CampsitesList = () => {
-    const campsites = useSelector(selectAllCampsites);
-    console.log('campsites:', campsites)
+  const campsites = useSelector(selectAllCampsites);
+  console.log("campsites:", campsites);
+
+  const isLoading = useSelector((state) => state.campsites.isLoading);
+  const errMsg = useSelector((state) => state.campsites.errMsg);
+
+  if (isLoading) {
     return (
-        <Row className="ms-auto">
-            {campsites.map((cs, index) => (
-                <Col 
-                    md="5" 
-                    className="m-4" 
-                    key={CampsiteCard.id}
-                    
-                    >
-                    
-                    <CampsiteCard campsite={cs} key={index}/>
-                </Col>
-            ))}
-        </Row>
+      <Row>
+        <Loading />
+      </Row>
     );
+  }
+
+  if (errMsg) {
+    return (
+        <Row>
+            <Error errMsg={errMsg} />
+        </Row>
+    )
+  }
+
+  return (
+    <Row className="ms-auto">
+      {campsites.map((cs, index) => (
+        <Col md="5" className="m-4" key={CampsiteCard.id}>
+          <CampsiteCard campsite={cs} key={index} />
+        </Col>
+      ))}
+    </Row>
+  );
 };
 
 export default CampsitesList;
