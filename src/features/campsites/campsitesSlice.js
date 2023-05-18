@@ -4,7 +4,7 @@ import { baseUrl } from "../../app/shared/baseUrl";
 import { mapImageUrl } from "../../utils/mapImageUrl";
 
 export const fetchCampsites = createAsyncThunk(
-  "campsites/fetcCampsites",
+  "campsites/fetchCampsites",
   async () => {
     const response = await fetch(baseUrl + "campsites");
     if (!response.ok) {
@@ -52,5 +52,11 @@ export const selectCampsiteById = (id) => (state) => {
 };
 
 export const selectFeaturedCampsite = (state) => {
-  return state.campsites.campsitesArray.find((cs) => cs.featured);
+  return {
+    featuredItem: state.campsites.campsitesArray.find(
+      (campsite) => campsite.featured
+    ),
+    isLoading: state.campsites.isLoading,
+    errMsg: state.campsites.errMsg
+  } 
 };
